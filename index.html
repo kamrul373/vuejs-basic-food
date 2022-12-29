@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <div id="app" class="mt-5">
+        <h1 v-bind:class="headingClass">
+            {{heding}}
+        </h1>
+        <div class="text-center">
+
+            <div>
+                <h2 class="font-bold my-2">CartItems
+                    <span :style="cart.length === 0 ? {color: 'red'} : {}" class="ml-2"> {{cart.length}} </span>
+                    <span class="ml-3"> | Total Price : {{total}} TK</span>
+                </h2>
+                <p v-for="cartItem in cart" v-if="cart.length > 0"> {{cartItem.foodName}} : {{cartItem.price}} Tk </p>
+                <h2 class="text-xl" v-else>No food in cart</h2>
+
+            </div>
+            <div>
+                <ul class="disc">
+                    <li v-for="flavor in flavors" :key="flavor.id" class="my-4 flex justify-center items-center">
+                        <span class="px-8 w-[200px]">{{flavor.foodName}}</span>
+                        <div class="mt-4">
+                            <button class="px-4 bg-green-500 text-white mr-4"
+                                v-on:click="addToCart(flavor.id)">+</button>
+                            <button class="px-4 bg-red-500 text-white" v-on:click="removeFromCart(flavor.id)">-</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="./main.js"></script>
+
+    <script>
+        const mounted = app.mount("#app")
+
+    </script>
+</body>
+
+</html>
